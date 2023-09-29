@@ -1,0 +1,13 @@
+{
+    "message": .,
+    "validationIssues": [
+                            {
+                                "message": "Gender must be 'F' or 'M'",
+                                "condition": $.Gender != 'F' && $.Gender != 'M'
+                            },
+                            {
+                                "message": "Ethnicity cannot be 'Unknown'",
+                                "condition": $.Ethnicity == 'Unknown'
+                            }
+                        ]
+}
