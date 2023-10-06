@@ -1,0 +1,8 @@
+import java.util.Map;
+
+rule "Transform Gender"
+    when
+        $jsonData: Map(this["Gender"] == 'F')
+    then
+        $jsonData.put("Gender", "Female");
+end
