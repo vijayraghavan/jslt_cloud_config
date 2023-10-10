@@ -1,3 +1,3 @@
 drl:
   transformation-rules:
-    uri: https://api.github.com/repos/vijayraghavan/jslt_cloud_config/contents/drl/transformation-rules.drl
+    uri: https://raw.githubusercontent.com/vijayraghavan/jslt_cloud_config/master/drl/transformation-rules.drl?v=1
