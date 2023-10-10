@@ -2,7 +2,7 @@ import java.util.Map;
 
 rule "Transform Gender"
     when
-        $jsonData: Map(this["Gender"] == 'F')
+        $jsonData: Map(this["Gender"] == 'T')
     then
         $jsonData.put("Gender", "Female");
 end
