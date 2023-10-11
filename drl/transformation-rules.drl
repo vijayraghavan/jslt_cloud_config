@@ -1,8 +1,35 @@
 import java.util.Map;
+import java.util.HashMap;
+
+function void accumulateError(Map jsonData, String errorMessage, String fieldName) {
+    Map<String, String> validationErrors = (Map<String, String>) jsonData.get("validationErrors");
+    if (validationErrors == null) {
+        validationErrors = new HashMap<>();
+        jsonData.put("validationErrors", validationErrors);
+    }
+    validationErrors.put(fieldName, errorMessage);
+}
 
 rule "Transform Gender"
+    ruleflow-group "transformations"
     when
         $jsonData: Map(this["Gender"] == 'F')
     then
         $jsonData.put("Gender", "Female");
+end
+
+rule "Validate Gender"
+ ruleflow-group "validations"
+ when
+    $jsonData: Map(this["Gender"] == null || (this["Gender"] != 'M' && this["Gender"] != 'F'))
+ then
+    accumulateError($jsonData, "Gender cannot be null or should be 'M' or 'F'", "Gender");
+end
+
+rule "Validate Ethnicity"
+ ruleflow-group "validations"
+ when
+    $jsonData: Map(this["Ethnicity"] == null || this["Ethnicity"] == 'Unknown')
+ then
+    accumulateError($jsonData, "Ethnicity cannot be null or 'Unknown'", "Ethnicity");
 end
