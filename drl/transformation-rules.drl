@@ -11,15 +11,15 @@ function void accumulateError(Map jsonData, String errorMessage, String fieldNam
 }
 
 rule "Transform Gender"
-    ruleflow-group "transformations"
-    when
-        $jsonData: Map(this["Gender"] == 'F')
-    then
-        $jsonData.put("Gender", "Female");
+  agenda-group "transformations"
+  when
+    $jsonData: Map(this["Gender"] == 'F')
+  then
+    $jsonData.put("Gender", "Female");
 end
 
 rule "Validate Gender"
- ruleflow-group "validations"
+ agenda-group "validations"
  when
     $jsonData: Map(this["Gender"] == null || (this["Gender"] != 'M' && this["Gender"] != 'F'))
  then
@@ -27,7 +27,7 @@ rule "Validate Gender"
 end
 
 rule "Validate Ethnicity"
- ruleflow-group "validations"
+ agenda-group "validations"
  when
     $jsonData: Map(this["Ethnicity"] == null || this["Ethnicity"] == 'Unknown')
  then
